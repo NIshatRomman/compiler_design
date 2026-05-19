@@ -1,0 +1,66 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// DFA implementation
+bool isAccepted(string str) {
+
+    int m = 0;
+
+    for (char n : str) {
+
+        switch (m) {
+
+        case 0:
+            if (n == 'a')
+                m = 1;
+            else if (n == 'b')
+                m = 2;
+            else
+                return false;
+            break;
+
+        case 1:
+            if (n == 'a')
+                m = 1;
+            else if (n == 'b')
+                m = 2;
+            else
+                return false;
+            break;
+
+        case 2:
+            if (n == 'b')
+                m = 2;
+            else if (n == 'a')
+                m = 1;
+            else
+                return false;
+            break;
+
+        default:
+            return false;
+        }
+    }
+
+    // Final/accept states
+    if (m == 1 || m == 2)
+        return true;
+
+    return false;
+}
+
+int main() {
+
+    string p;
+
+    cout << "Enter string: ";
+    cin >> p;
+
+    if (isAccepted(p))
+        cout << "Accepted" << endl;
+    else
+        cout << "Rejected" << endl;
+
+    return 0;
+}
